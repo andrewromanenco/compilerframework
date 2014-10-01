@@ -7,8 +7,10 @@ Check com.romanenco.cfrm.grammar.example.DragonLLGrammar.java for sample use
 case. This is implementation for a grammar from Dragon book.
 
 ## Sample
-Framework is the base for an implementation of a sample language:
-[https://github.com/andrewromanenco/functionly](https://github.com/andrewromanenco/functionly)  
+Framework is the base for these implementations:
+
+- [https://github.com/andrewromanenco/functionly](https://github.com/andrewromanenco/functionly)
+- [https://github.com/andrewromanenco/brainfk](https://github.com/andrewromanenco/brainfk)  
 
 ## License
 The code is released under Apache License Version 2.0
