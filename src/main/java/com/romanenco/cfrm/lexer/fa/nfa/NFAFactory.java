@@ -30,6 +30,7 @@ public class NFAFactory {
     private static final char STAR = '*';
     private static final char UNION = '|';
     private static final char CONCAT = '+';
+    private static final char BACKSL = '\\';
 
     private final String pattern;
     private int index;
@@ -42,8 +43,6 @@ public class NFAFactory {
     public Regex build() {
         final Deque<Regex> regStack = new LinkedList<>();
         final Deque<Operation> opsStack = new LinkedList<>();
-        final Regex firstReg = getNextElement();
-        regStack.push(firstReg);
         while (index < pattern.length()) {
             if (pattern.charAt(index) == CLOSE_PARAN) {
                 index++;
@@ -93,15 +92,6 @@ public class NFAFactory {
         assert opsStack.isEmpty();
     }
 
-    private Regex getNextElement() {
-        if (pattern.charAt(index) == OPEN_PARAN) {
-            index++;
-            return build();
-        } else {
-            return Thomson.symbolRegex(pattern.charAt(index++));
-        }
-    }
-
     private Object getNext() {
         final char nextInput = pattern.charAt(index++);
         switch (nextInput) {
@@ -113,6 +103,8 @@ public class NFAFactory {
             return Operation.AND;
         case OPEN_PARAN:
             return build();
+        case BACKSL:
+            return Thomson.symbolRegex(pattern.charAt(index++));
         default:
             return Thomson.symbolRegex(nextInput);
         }

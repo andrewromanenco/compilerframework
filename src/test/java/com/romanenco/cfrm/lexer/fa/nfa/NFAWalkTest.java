@@ -116,4 +116,30 @@ public class NFAWalkTest {
         Assert.assertFalse(NFAWalk.walk(regex, "tast"));
     }
 
+    @Test
+    public void test10() {
+        final NFAFactory factory = new NFAFactory("\\*");
+        final Regex regex = factory.build();
+        Assert.assertTrue(NFAWalk.walk(regex, "*"));
+        Assert.assertFalse(NFAWalk.walk(regex, "a"));
+    }
+
+    @Test
+    public void test11() {
+        final NFAFactory factory = new NFAFactory("\\(");
+        final Regex regex = factory.build();
+        Assert.assertTrue(NFAWalk.walk(regex, "("));
+        Assert.assertFalse(NFAWalk.walk(regex, "a"));
+    }
+
+    @Test
+    public void test12() {
+        final NFAFactory factory = new NFAFactory("a+a+\\)*");
+        final Regex regex = factory.build();
+        Assert.assertTrue(NFAWalk.walk(regex, "aa"));
+        Assert.assertTrue(NFAWalk.walk(regex, "aa)"));
+        Assert.assertTrue(NFAWalk.walk(regex, "aa))"));
+        Assert.assertFalse(NFAWalk.walk(regex, "aa)b"));
+    }
+
 }
